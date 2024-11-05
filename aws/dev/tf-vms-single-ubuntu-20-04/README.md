@@ -1,0 +1,1 @@
+![Single](../../images/tf-vms-single-ubuntu-20-04.png)

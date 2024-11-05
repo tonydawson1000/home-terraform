@@ -1,0 +1,1 @@
+![ASG](../../images/tf-vms-auto-scaling-group.png)
