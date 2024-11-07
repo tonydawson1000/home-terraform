@@ -26,6 +26,44 @@ Using short lived Environment Variables
 - `export AWS_SECRET_ACCESS_KEY=<your-secret-access-key-here>`
 
 ---
+# Terraform Remote State - S3
+
+An AWS S3 Bucket has been setup to store Terraform Remote State
+
+An AWS DynamoDB Table has been setup to handle (single user) locks to the S3 Contents / State File
+
+The 'Folder Structure' will be used to isolate and indicate each 'Environment' and 'Resource'/'Project' - reducing the risk of cross-state contamination or corruption
+
+The 'state' file structure is used to mirror this layout in S3 - keeping each 'project' isolated from one another
+
+## To initialise the Remote State Store (S3 Bucket)
+
+- Navigate to the [`global/tf-remote-state`](../aws/global/tf-remote-state/) folder
+
+- Ensure the `backend.tf` file is NOT included at this stage (comment out)
+
+- Run `terraform init` (to download the required provider)
+    - This will create the local `.terraform` folder and `.terraform.lock.hcl` file
+
+- Run `terraform apply` (to make the changes/create the S3 Bucket)
+    - At this point there will be an S3 Bucket and DynamoDB Table in AWS, but Terraform State is still 'Local'
+
+- Re-Include (uncomment) the [`backend.tf`](../aws/global/tf-remote-state/backend.tf) and [`backend.hcl`](../aws/global/tf-remote-state/backend.hcl) files - these have details of the Remote State Store (S3 Bucket)
+
+- ## !! Double check the values !!
+    - [`backend.tf`](../aws/global/tf-remote-state/backend.tf) - The KEY value must be unique across all Terraform Projects (as it specifies the location in S3 of the .tfstate file)
+    - [`backend.hcl`](../aws/global/tf-remote-state/backend.hcl) - Contains details of the S3 Bucket and DynamoDB Table to use
+
+- Run `terraform init -backend-config=backend.hcl`
+
+- You will be asked - <em><b>"Do you want to copy existing state to the new backend?"</b></em> - enter "yes" to continue
+
+- Verify in the AWS Account that:
+    - The S3 Bucket exists and ...
+    - There is an entry in the DynamoDB Table
+
+
+---
 # AWS Resources
 
 | Resource                   | Description               |
