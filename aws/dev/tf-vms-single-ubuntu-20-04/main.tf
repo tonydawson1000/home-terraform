@@ -32,7 +32,10 @@ resource "aws_instance" "ami-ubuntu-20-04" {
 
   user_data = <<-EOF
             #!/bin/bash
-            echo "Hello Single EC2 VM - Ubuntu 22.04!" > index.html
+            echo "<h1>Hello Single EC2 VM!</h1>" > index.html
+            echo "<p>Ubuntu 22.04!</p>" >> index.html
+            echo "<p>Running on Host: " $(hostname -f) "</p>">> index.html
+            echo "<p>Date: " $(date) "</p>" >> index.html
             nohup busybox httpd -f -p ${var.server_port} &
             EOF
 
