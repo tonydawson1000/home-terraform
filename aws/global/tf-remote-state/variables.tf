@@ -1,6 +1,7 @@
 # You cannot use Varialbe in Remote Backend State setup
 # These are here for reference only...
-variable "tf_remote_state_region" {
+# Name of the AWS Region
+variable "tf_region" {
   description = "The AWS Region"
   type        = string
   default     = "eu-west-2"
