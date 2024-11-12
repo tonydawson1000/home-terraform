@@ -16,8 +16,11 @@ resource "aws_launch_template" "lt-asg-ubuntu-20-04" {
   instance_type          = "t2.micro"
   vpc_security_group_ids = [aws_security_group.sg-asg-ubuntu-20-04-in-8080.id]
 
+  # Render the User Data script as a Template
   user_data = base64encode(templatefile("scripts/user-data.sh", {
     server_port = var.server_port
+    db_address  = data.terraform_remote_state.mysqldb.outputs.db_address
+    db_port     = data.terraform_remote_state.mysqldb.outputs.db_port
   }))
 
   # Required when using a launch configuration with an auto scaling group.

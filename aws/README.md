@@ -91,3 +91,7 @@ The 'state' file structure is used to mirror this layout in S3 - keeping each 'p
     - Ubuntu Server 22.04 LTS (HVM), SSD Volume Type
         - `ami-03ceeb33c1e4abcd1` (64-bit (x86))
         - `ami-086bdccec99d20c2a` (64-bit (Arm))
+
+- [AWS Free Tier](https://aws.amazon.com/free/?)
+    - [Amazon RDS Free Tier](https://aws.amazon.com/rds/free/)
+    - [mysql - DB / RDS (750 hours per month - for first 12 months)](https://aws.amazon.com/free/?nc2=h_ql_pr_ft&all-free-tier.sort-by=item.additionalFields.SortRank&all-free-tier.sort-order=asc&awsf.Free%20Tier%20Types=tier%2312monthsfree&awsf.Free%20Tier%20Categories=categories%23databases)
