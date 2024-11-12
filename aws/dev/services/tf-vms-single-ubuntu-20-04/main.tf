@@ -30,14 +30,12 @@ resource "aws_instance" "ami-ubuntu-20-04" {
 
   vpc_security_group_ids = [aws_security_group.sg-single-ec2-ubuntu-20-04.id]
 
-  user_data = <<-EOF
-            #!/bin/bash
-            echo "<h1>Hello Single EC2 VM!</h1>" > index.html
-            echo "<p>Ubuntu 22.04!</p>" >> index.html
-            echo "<p>Running on Host: " $(hostname -f) "</p>">> index.html
-            echo "<p>Date: " $(date) "</p>" >> index.html
-            nohup busybox httpd -f -p ${var.server_port} &
-            EOF
+  # Render the User Data script as a Template
+  user_data = base64encode(templatefile("scripts/user-data.sh", {
+    server_port = var.server_port
+    db_address  = data.terraform_remote_state.mysqldb.outputs.db_address
+    db_port     = data.terraform_remote_state.mysqldb.outputs.db_port
+  }))
 
   user_data_replace_on_change = true
 

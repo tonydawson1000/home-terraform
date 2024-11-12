@@ -1,3 +1,19 @@
+# Name of the AWS Region
+variable "tf_region" {
+  description = "The AWS Region"
+  type        = string
+  default     = "eu-west-2"
+}
+
+# Name of the S3 Bucket for storing Remote Terraform State
+# ** THIS 'NAME' MUST BE GLOBALLY UNIQUE **
+# This is declared and used in `backend.tf' and `backend.hcl`
+variable "tf_remote_state_s3_bucket_name" {
+  description = "A unique Name for the S3 Bucket to store our Terraform Remote State"
+  type        = string
+  default     = "tf-remote-state-store-td-aws"
+}
+
 # VM Port to expose for handling HTTP Requests
 variable "server_port" {
   description = "The port the server will use for inbound HTTP requests"
