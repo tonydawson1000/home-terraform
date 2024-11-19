@@ -12,6 +12,11 @@ output "public_ip" {
 }
 
 output "server_port" {
-  value       = module.single_ec2_vm.server_port
+  value       = var.server_port
   description = "The Inbound HTTP Port exposed in the Security Group"
+}
+
+output "http_endpoint" {
+  value       = "${module.single_ec2_vm.public_dns}:${var.server_port}"
+  description = "Complete Endpoint URL inc Port for HTTP"
 }
