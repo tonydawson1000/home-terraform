@@ -10,8 +10,3 @@ output "public_ip" {
   value       = aws_instance.single-ec2-vm.public_ip
   description = "The public IP address of the EC2 VM"
 }
-
-output "server_port" {
-  value       = var.server_port
-  description = "The Inbound HTTP Port exposed in the Security Group"
-}

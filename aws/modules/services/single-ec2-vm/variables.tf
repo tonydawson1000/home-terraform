@@ -1,5 +1,5 @@
 ###
-# REQUIRED PARAMETERS
+# REQUIRED PARAMETERS - EC2 Instance
 # You must provide a value for each of these parameters.
 ###
 
@@ -9,23 +9,19 @@ variable "ec2_vm_name" {
   type        = string
 }
 
-variable "db_remote_state_region" {
-  description = "The region for the database's remote state"
+# DB Details
+variable "db_address" {
+  description = "Endpoint Address of the RDS DB to connect to"
   type        = string
 }
 
-variable "db_remote_state_bucket" {
-  description = "The name of the S3 bucket for the database's remote state"
-  type        = string
-}
-
-variable "db_remote_state_key" {
-  description = "The path for the database's remote state in S3"
-  type        = string
+variable "db_port" {
+  description = "Endpoint Port of the RDS DB to connect to"
+  type        = number
 }
 
 ###
-# OPTIONAL PARAMETERS
+# OPTIONAL PARAMETERS - Security Group
 # These parameters have reasonable defaults.
 ###
 
@@ -42,6 +38,11 @@ variable "server_port" {
   type        = number
   default     = 8090
 }
+
+###
+# OPTIONAL PARAMETERS - EC2 Instance
+# These parameters have reasonable defaults.
+###
 
 # AWS EC2 AMI Instance Id for VM
 variable "ami_instance_id" {
