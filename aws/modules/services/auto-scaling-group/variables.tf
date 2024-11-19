@@ -1,5 +1,21 @@
 ###
-# REQUIRED PARAMETERS
+# REQUIRED PARAMETERS - EC2 (Launch Template)
+# You must provide a value for each of these parameters.
+###
+
+# DB Details
+variable "db_address" {
+  description = "Endpoint Address of the RDS DB to connect to"
+  type        = string
+}
+
+variable "db_port" {
+  description = "Endpoint Port of the RDS DB to connect to"
+  type        = number
+}
+
+###
+# REQUIRED PARAMETERS - EC2 (ASG)
 # You must provide a value for each of these parameters.
 ###
 
@@ -24,6 +40,11 @@ variable "desired_capacity" {
   type        = number
 }
 
+###
+# REQUIRED PARAMETERS - EC2 (LB)
+# You must provide a value for each of these parameters.
+###
+
 # Name of the Application Load Balancer
 variable "load_balancer_name" {
   description = "Name of the Load Balancer used as a single point into the ASG Cluster"
@@ -36,23 +57,8 @@ variable "load_balancer_target_group_name" {
   type        = string
 }
 
-variable "db_remote_state_region" {
-  description = "The region for the database's remote state"
-  type        = string
-}
-
-variable "db_remote_state_bucket" {
-  description = "The name of the S3 bucket for the database's remote state"
-  type        = string
-}
-
-variable "db_remote_state_key" {
-  description = "The path for the database's remote state in S3"
-  type        = string
-}
-
 ###
-# OPTIONAL PARAMETERS
+# OPTIONAL PARAMETERS - Security Group
 # These parameters have reasonable defaults.
 ###
 
@@ -62,14 +68,6 @@ variable "security_group_http_in_lb_name" {
   type        = string
   default     = "tf-security-group-http-in-lb"
 }
-
-# Name of the Security Group for accepting HTTP Requests (`server_port` on the internal VMs)
-variable "security_group_http_in_vms_name" {
-  description = "Name of the Security Group used for the VMs"
-  type        = string
-  default     = "tf-security-group-http-in-vms"
-}
-
 # Front End Port for accepting HTTP Requests at the Load Balancer
 variable "http_port" {
   description = "The default port for HTTP"
@@ -77,12 +75,23 @@ variable "http_port" {
   default     = 80
 }
 
+# Name of the Security Group for accepting HTTP Requests (`server_port` on the internal VMs)
+variable "security_group_http_in_vms_name" {
+  description = "Name of the Security Group used for the VMs"
+  type        = string
+  default     = "tf-security-group-http-in-vms"
+}
 # VM Port to expose for handling HTTP Requests at the ASG/VMs
 variable "server_port" {
   description = "The port the server(s) will use for inbound HTTP requests"
   type        = number
-  default     = 8090
+  default     = 8080
 }
+
+###
+# OPTIONAL PARAMETERS - EC2 (Launch Template)
+# These parameters have reasonable defaults.
+###
 
 # AWS EC2 AMI Instance Id for VM
 variable "ami_instance_id" {

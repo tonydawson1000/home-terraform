@@ -22,8 +22,8 @@ resource "aws_launch_template" "lt-asg-vms" {
     ami_instance_id   = var.ami_instance_id
     ami_instance_type = var.ami_instance_type
 
-    db_address = data.terraform_remote_state.mysqldb.outputs.db_address
-    db_port    = data.terraform_remote_state.mysqldb.outputs.db_port
+    db_address = var.db_address
+    db_port    = var.db_port
 
     server_port = var.server_port
   }))

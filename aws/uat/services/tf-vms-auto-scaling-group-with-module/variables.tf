@@ -6,7 +6,7 @@
 variable "security_group_http_in_lb_name" {
   description = "Name of the Security Group used on the LB"
   type        = string
-  default     = "tf-my-dev-security-group-http-in-lb"
+  default     = "tf-my-uat-security-group-http-in-lb"
 }
 # Front End Port for accepting HTTP Requests at the Load Balancer
 variable "http_port" {
@@ -19,13 +19,13 @@ variable "http_port" {
 variable "security_group_http_in_vms_name" {
   description = "Name of the Security Group used for the VMs"
   type        = string
-  default     = "tf-my-dev-security-group-http-in-vms"
+  default     = "tf-my-uat-security-group-http-in-vms"
 }
 # VM Port to expose for handling HTTP Requests at the ASG/VMs
 variable "server_port" {
   description = "The port the server(s) will use for inbound HTTP requests"
   type        = number
-  default     = 8085
+  default     = 8095
 }
 
 # Name of the AWS Region
