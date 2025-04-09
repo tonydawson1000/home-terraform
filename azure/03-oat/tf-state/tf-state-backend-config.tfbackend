@@ -1,0 +1,4 @@
+resource_group_name     = "tf-state-oat"
+storage_account_name    = "tfoatstatestorage"
+container_name          = "tf-state-oat-store"
+key                     = "terraform.tfstate"
