@@ -1,0 +1,4 @@
+resource_group_name     = "tf-state-poc"
+storage_account_name    = "tfpocstatestorage"
+container_name          = "tf-state-poc-networking"
+key                     = "terraform.tfstate"
